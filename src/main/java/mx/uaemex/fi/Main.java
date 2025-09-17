@@ -1,12 +1,15 @@
 package mx.uaemex.fi;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import mx.uaemex.fi.patterns.facade.TiendaFacade;
 
 public class Main {
     public static void main(String[] args) {
-        LocalDateTime now = LocalDateTime.now();
-        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        System.out.println( "Hola mundo! " + now.format(formatter));
+        usingFacade();
+    }
+
+    private static void usingFacade() {
+        System.out.println("=====Usando patron Facade=====");
+        TiendaFacade tiendaFacade = new TiendaFacade();
+        tiendaFacade.comprar("Arroz", "Calle 1 #123");
     }
 }
