@@ -1,12 +1,19 @@
 package mx.uaemex.fi;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import mx.uaemex.fi.patterns.decorator.*;
 
 public class Main {
     public static void main(String[] args) {
-        LocalDateTime now = LocalDateTime.now();
-        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        System.out.println( "Hola mundo! " + now.format(formatter));
+        useDecorator();
+    }
+
+    private static void useDecorator() {
+        System.out.println("=====Usando patron Decorator=====");
+
+        Notifier notifier = new DecoratorConcreto();
+        notifier = new SMSDecorator(notifier, "+521333444555");
+        notifier = new EmailDecorator(notifier, "juan.perez@mail.com");
+        notifier = new FacebookDecorator(notifier, "juan.perez");
+        notifier.send("Hola mundo!");
     }
 }
